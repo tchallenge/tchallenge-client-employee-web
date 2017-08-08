@@ -28,6 +28,7 @@ targetCompatibility = 1.8
 
 bootRun {
 
+    addResources = true
     systemProperties = System.properties as Map<String, ?>
 }
 
