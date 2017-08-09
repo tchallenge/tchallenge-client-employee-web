@@ -6,14 +6,20 @@ import groovy.transform.TypeChecked
 import java.time.Instant
 import javax.annotation.PostConstruct
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Component
+
+import ru.tchallenge.client.employee.web.setup.build.BuildLayout
 
 @TypeChecked
 @PackageScope
 @Component
 @Lazy(false)
 class SetupProviderBean implements SetupProvider {
+
+    @Autowired
+    BuildLayout build
 
     private Setup value
 
@@ -27,8 +33,7 @@ class SetupProviderBean implements SetupProvider {
         value = new Setup(
                 title: 'tchallenge-client-employee-web',
                 description: 'T-Challenge client web application for employees',
-                version: '1.0.0-SNAPSHOT',
-                build: UUID.randomUUID().toString(),
+                build: build,
                 startedAt: Instant.now()
         )
     }

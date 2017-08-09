@@ -5,15 +5,14 @@ import groovy.transform.TypeChecked
 
 import java.time.Instant
 
+import ru.tchallenge.client.employee.web.setup.build.BuildLayout
+
 @TypeChecked
 @Immutable(knownImmutableClasses = [Instant])
 class Setup {
 
     String title
     String description
-
-    String version
-    String build
-
+    BuildLayout build
     Instant startedAt
 }
