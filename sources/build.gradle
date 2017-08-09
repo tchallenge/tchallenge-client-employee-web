@@ -1,3 +1,5 @@
+import java.time.Instant
+
 buildscript {
 
     repositories {
@@ -30,6 +32,27 @@ bootRun {
 
     addResources = true
     systemProperties = System.properties as Map<String, ?>
+}
+
+task createProperties(dependsOn: processResources) {
+
+    doLast {
+
+        def buildProperties = new File("${buildDir}/resources/main/build.properties")
+
+        buildProperties.withWriter { writer ->
+            def properties = new Properties()
+            properties['createdAt'] = Instant.now().toString()
+            properties['id'] = UUID.randomUUID().toString()
+            properties['version'] = project.version.toString()
+            properties.store(writer, 'Build properties')
+        }
+    }
+}
+
+classes {
+
+    dependsOn createProperties
 }
 
 repositories {
