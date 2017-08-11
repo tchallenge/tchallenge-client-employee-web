@@ -22,4 +22,6 @@ spring:
 
 tchallenge:
 
+  asset.vendor.prefix: ${vendor-asset-prefix:https://cdnjs.cloudflare.com/ajax/libs/}
+
   template.cache.enabled: false

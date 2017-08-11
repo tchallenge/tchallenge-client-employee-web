@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 
-<html>
+{{#with setup}}
+    <html>
 
-    <head>
+        <head>
 
-        <title>T-Challenge Employee Client</title>
-    </head>
+            <title>T-Challenge Employee Client</title>
 
-    <body>
+            {{#with asset}}
+                {{#each styles}}
+                    <link  rel="stylesheet" href="{{uri}}"/>
+                {{/each}}
+                {{#each scripts}}
+                    <script type="javascript" src="{{uri}}"></script>
+                {{/each}}
+            {{/with}}
+        </head>
 
-        <h1>It works!</h1>
-    </body>
-</html>
+        <body>
+
+            <h1>It works!</h1>
+        </body>
+    </html>
+{{/with}}

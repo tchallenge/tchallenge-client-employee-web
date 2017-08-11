@@ -10,6 +10,36 @@
                 <li>Build ID: {{build.id}}</li>
                 <li>Build Version: {{build.version}}</li>
             </ul>
+            <hr>
+            {{#with asset}}
+                <h2>Asset Layout</h2>
+                <h4>Styles</h4>
+                <table>
+                    <tr>
+                        <th>URI</th>
+                        <th>Vendor</th>
+                    </tr>
+                    {{#each styles}}
+                        <tr>
+                            <td>{{uri}}</td>
+                            <td>{{vendor}}</td>
+                        </tr>
+                    {{/each}}
+                </table>
+                <h4>Scripts</h4>
+                <table>
+                    <tr>
+                        <th>URI</th>
+                        <th>Vendor</th>
+                    </tr>
+                    {{#each scripts}}
+                        <tr>
+                            <td>{{uri}}</td>
+                            <td>{{vendor}}</td>
+                        </tr>
+                    {{/each}}
+                </table>
+            {{/with}}
         </body>
     </html>
 {{/with}}

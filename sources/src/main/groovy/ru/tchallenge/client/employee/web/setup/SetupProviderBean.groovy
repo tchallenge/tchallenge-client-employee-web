@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Component
 
+import ru.tchallenge.client.employee.web.setup.asset.AssetLayout
 import ru.tchallenge.client.employee.web.setup.build.BuildLayout
 
 @TypeChecked
@@ -17,6 +18,9 @@ import ru.tchallenge.client.employee.web.setup.build.BuildLayout
 @Component
 @Lazy(false)
 class SetupProviderBean implements SetupProvider {
+
+    @Autowired
+    AssetLayout asset
 
     @Autowired
     BuildLayout build
@@ -33,6 +37,7 @@ class SetupProviderBean implements SetupProvider {
         value = new Setup(
                 title: 'tchallenge-client-employee-web',
                 description: 'T-Challenge client web application for employees',
+                asset: asset,
                 build: build,
                 startedAt: Instant.now()
         )
