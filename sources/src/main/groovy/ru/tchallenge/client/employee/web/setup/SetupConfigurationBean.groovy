@@ -4,20 +4,18 @@ import groovy.transform.PackageScope
 import groovy.transform.TypeChecked
 
 import java.time.Instant
-import javax.annotation.PostConstruct
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Lazy
-import org.springframework.stereotype.Component
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
 
 import ru.tchallenge.client.employee.web.setup.asset.AssetLayout
 import ru.tchallenge.client.employee.web.setup.build.BuildLayout
 
 @TypeChecked
 @PackageScope
-@Component
-@Lazy(false)
-class SetupProviderBean implements SetupProvider {
+@Configuration
+class SetupConfigurationBean {
 
     @Autowired
     AssetLayout asset
@@ -25,16 +23,9 @@ class SetupProviderBean implements SetupProvider {
     @Autowired
     BuildLayout build
 
-    private Setup value
-
-    @Override
-    Setup getValue() {
-        value
-    }
-
-    @PostConstruct
-    protected void init() {
-        value = new Setup(
+    @Bean
+    SetupLayout setupLayout() {
+        new SetupLayout(
                 title: 'tchallenge-client-employee-web',
                 description: 'T-Challenge client web application for employees',
                 asset: asset,

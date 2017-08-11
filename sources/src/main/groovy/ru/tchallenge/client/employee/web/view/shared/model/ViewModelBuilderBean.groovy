@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Scope
 import org.springframework.context.annotation.ScopedProxyMode
 import org.springframework.stereotype.Component
 
-import ru.tchallenge.client.employee.web.setup.SetupProvider
+import ru.tchallenge.client.employee.web.setup.SetupLayout
 
 @TypeChecked
 @PackageScope
@@ -19,7 +19,7 @@ import ru.tchallenge.client.employee.web.setup.SetupProvider
 class ViewModelBuilderBean implements ViewModelBuilder {
 
     @Autowired
-    SetupProvider setupProvider
+    SetupLayout setupLayout
 
     private Map<String, ?> attributes
 
@@ -36,7 +36,7 @@ class ViewModelBuilderBean implements ViewModelBuilder {
     @PostConstruct
     protected void init() {
         attributes = [
-                setup: setupProvider.value
+                setup: setupLayout
         ]
     }
 }

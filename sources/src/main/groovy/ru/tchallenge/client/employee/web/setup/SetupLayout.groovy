@@ -10,7 +10,7 @@ import ru.tchallenge.client.employee.web.setup.build.BuildLayout
 
 @TypeChecked
 @Immutable(knownImmutableClasses = [Instant])
-class Setup {
+class SetupLayout {
 
     String title
     String description
