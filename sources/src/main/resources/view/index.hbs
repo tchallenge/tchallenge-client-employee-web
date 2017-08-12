@@ -11,10 +11,10 @@
 
             {{#with asset}}
                 {{#each styles}}
-                    <link  rel="stylesheet" href="{{uri}}"/>
+                    <link  rel="stylesheet" href="{{uri}}?build={{../build.id}}"/>
                 {{/each}}
                 {{#each scripts}}
-                    <script type="javascript" src="{{uri}}"></script>
+                    <script type="javascript" src="{{uri}}?build={{../build.id}}"></script>
                 {{/each}}
             {{/with}}
         </head>
