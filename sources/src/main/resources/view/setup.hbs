@@ -2,18 +2,27 @@
 
 {{#with setup}}
     <html>
+
+        <head>
+            <base href="{{location.base}}"/>
+            <title>Setup</title>
+        </head>
+
         <body>
             <h1>Application Setup</h1>
-            <i>Important: this page MUST NOT be accessible in production!</i>
+            <u>Important: this page MUST NOT be accessible in production!</u>
+
+            <h2>General</h2>
             <ul>
-                <li>Title: {{title}}</li>
-                <li>Description: {{description}}</li>
-                <li>Operating mode: {{mode}}</li>
+                <li><b>Title:</b> {{title}}</li>
+                <li><b>Description:</b> {{description}}</li>
+                <li><b>Operating mode:</b> {{mode}}</li>
+                <li><b>Started at:</b> {{startedAt}}</li>
             </ul>
             <hr>
 
+            <h2>Build</h2>
             {{#with build}}
-                <h2>Build properties</h2>
                 <ul>
                     <li><b>Version:</b> {{version}}</li>
                     <li><b>ID</b> {{id}}</li>
@@ -22,8 +31,8 @@
             {{/with}}
             <hr>
 
+            <h2>Locations</h2>
             {{#with location}}
-                <h2>Location Layout</h2>
                 <ul>
                     <li><b>Base URL:</b> {{base}}</li>
                     <li><b>Client self URL:</b> {{client}}</li>
@@ -37,18 +46,18 @@
             {{/with}}
             <hr>
 
+            <h2>Static Resources</h2>
             {{#with asset}}
-                <h2>Asset Layout</h2>
 
+                <h3>Caching</h3>
                 {{#with cache}}
-                    <h4>Resource Caching</h4>
                     <ul>
                         <li><b>Enabled:</b> {{enabled}}</li>
                         <li><b>Expiration:</b> {{expiration}}</li>
                     </ul>
                 {{/with}}
 
-                <h4>Styles</h4>
+                <h3>Styles</h3>
                 <table>
                     <tr>
                         <th>URI</th>
@@ -62,7 +71,7 @@
                     {{/each}}
                 </table>
 
-                <h4>Scripts</h4>
+                <h3>Scripts</h3>
                 <table>
                     <tr>
                         <th>URI</th>
