@@ -3,14 +3,20 @@ package ru.tchallenge.client.employee.web.setup.asset
 import groovy.transform.PackageScope
 import groovy.transform.TypeChecked
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+
+import ru.tchallenge.client.employee.web.setup.asset.cache.AssetCacheLayout
 
 @TypeChecked
 @PackageScope
 @Configuration
 class AssetConfigurationBean {
+
+    @Autowired
+    AssetCacheLayout cache
 
     @Value('${tchallenge.asset.vendor.prefix}')
     String vendorUriPrefix
@@ -18,6 +24,7 @@ class AssetConfigurationBean {
     @Bean
     AssetLayout assetLayout() {
         new AssetLayout(
+                cache: cache,
                 scripts: scripts,
                 styles: styles
         )

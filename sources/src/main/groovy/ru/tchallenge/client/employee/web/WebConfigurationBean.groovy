@@ -3,6 +3,12 @@ package ru.tchallenge.client.employee.web
 import groovy.transform.PackageScope
 import groovy.transform.TypeChecked
 
+import java.time.Duration
+import java.time.temporal.ChronoUnit
+import java.time.temporal.TemporalUnit
+import java.util.concurrent.TimeUnit
+
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -12,6 +18,8 @@ import org.springframework.web.servlet.config.annotation.PathMatchConfigurer
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
+import ru.tchallenge.client.employee.web.setup.SetupLayout
+import ru.tchallenge.client.employee.web.setup.asset.cache.AssetCacheLayout
 import ru.tchallenge.client.employee.web.utility.request.forward.ForwardFilterRegistrationBuilder
 
 @TypeChecked
@@ -33,6 +41,9 @@ class WebConfigurationBean extends WebMvcConfigurerAdapter {
     private final static String URI_PATTERN_SETUP = '/setup/?'
     private final static String URI_PATTERN_STATIC = '/static/.+'
 
+    @Autowired
+    SetupLayout setup
+
     @Override
     void addCorsMappings(CorsRegistry registry) {
         registry.addMapping(URI_MAPPING_ANY)
@@ -43,7 +54,7 @@ class WebConfigurationBean extends WebMvcConfigurerAdapter {
         registry
                 .addResourceHandler(URI_MAPPING_STATIC)
                 .addResourceLocations(PATH_STATIC)
-                .setCacheControl(CacheControl.noCache())
+                .setCacheControl(cacheControl(setup.asset.cache))
     }
 
     @Override
@@ -72,5 +83,13 @@ class WebConfigurationBean extends WebMvcConfigurerAdapter {
                 scope: URI_ALIAS_INDEX,
                 target: URI_INDEX
         ).build()
+    }
+
+    private static CacheControl cacheControl(AssetCacheLayout layout) {
+        layout.enabled ? maxAge(layout.expiration) : CacheControl.noCache()
+    }
+
+    private static CacheControl maxAge(Duration expiration) {
+        CacheControl.maxAge(expiration.get(ChronoUnit.SECONDS), TimeUnit.SECONDS)
     }
 }

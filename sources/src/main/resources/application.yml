@@ -22,7 +22,13 @@ spring:
 
 tchallenge:
 
-  asset.vendor.prefix: ${vendor-asset-prefix:https://cdnjs.cloudflare.com/ajax/libs/}
+  asset:
+
+    cache:
+      enabled: ${asset-cache-enabled:true}
+      expiration: ${asset-cache-expiration:P1D}
+
+    vendor.prefix: ${vendor-asset-prefix:https://cdnjs.cloudflare.com/ajax/libs/}
 
   location:
     base: ${location-base:/}

@@ -39,6 +39,15 @@
 
             {{#with asset}}
                 <h2>Asset Layout</h2>
+
+                {{#with cache}}
+                    <h4>Resource Caching</h4>
+                    <ul>
+                        <li><b>Enabled:</b> {{enabled}}</li>
+                        <li><b>Expiration:</b> {{expiration}}</li>
+                    </ul>
+                {{/with}}
+
                 <h4>Styles</h4>
                 <table>
                     <tr>
@@ -52,6 +61,7 @@
                         </tr>
                     {{/each}}
                 </table>
+
                 <h4>Scripts</h4>
                 <table>
                     <tr>
