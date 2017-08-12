@@ -24,4 +24,10 @@ tchallenge:
 
   asset.vendor.prefix: ${vendor-asset-prefix:https://cdnjs.cloudflare.com/ajax/libs/}
 
+  location:
+    base: ${location-base:/}
+    client: ${location-client:http://localhost:5000}
+    service:
+      complex: ${location-service-complex:http://localhost:3000}
+
   template.cache.enabled: false

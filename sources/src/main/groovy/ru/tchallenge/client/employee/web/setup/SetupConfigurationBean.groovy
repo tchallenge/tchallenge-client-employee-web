@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration
 
 import ru.tchallenge.client.employee.web.setup.asset.AssetLayout
 import ru.tchallenge.client.employee.web.setup.build.BuildLayout
+import ru.tchallenge.client.employee.web.setup.location.LocationLayout
 
 @TypeChecked
 @PackageScope
@@ -23,6 +24,9 @@ class SetupConfigurationBean {
     @Autowired
     BuildLayout build
 
+    @Autowired
+    LocationLayout location
+
     @Bean
     SetupLayout setupLayout() {
         new SetupLayout(
@@ -30,6 +34,7 @@ class SetupConfigurationBean {
                 description: 'T-Challenge client web application for employees',
                 asset: asset,
                 build: build,
+                location: location,
                 startedAt: Instant.now()
         )
     }

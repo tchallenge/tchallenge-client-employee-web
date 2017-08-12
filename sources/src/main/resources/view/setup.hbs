@@ -11,6 +11,22 @@
                 <li>Build Version: {{build.version}}</li>
             </ul>
             <hr>
+
+            {{#with location}}
+                <h2>Location Layout</h2>
+                <ul>
+                    <li><b>Base URL:</b> {{base}}</li>
+                    <li><b>Client self URL:</b> {{client}}</li>
+                    <li>
+                        <b>Services</b>
+                        <ul>
+                            <li><b>Complex:</b> {{service.complex}}</li>
+                        </ul>
+                    </li>
+                </ul>
+            {{/with}}
+            <hr>
+
             {{#with asset}}
                 <h2>Asset Layout</h2>
                 <h4>Styles</h4>

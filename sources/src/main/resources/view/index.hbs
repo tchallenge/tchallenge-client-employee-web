@@ -5,6 +5,8 @@
 
         <head>
 
+            <base href="{{location.base}}"/>
+
             <title>T-Challenge Employee Client</title>
 
             {{#with asset}}
@@ -18,8 +20,7 @@
         </head>
 
         <body>
-
-            <h1>It works!</h1>
+            Application works: {{location.client}}
         </body>
     </html>
 {{/with}}
