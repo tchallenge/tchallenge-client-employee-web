@@ -28,9 +28,9 @@ class WebConfigurationBean extends WebMvcConfigurerAdapter {
     private final static String URI_ALIAS_INDEX = '/*'
     private final static String URI_FAVICON = '/static/images/favicon.ico'
     private final static String URI_INDEX = '/'
-    private final static String URI_SETUP = '/setup'
     private final static String URI_MAPPING_ANY = '/**'
     private final static String URI_MAPPING_STATIC = '/static/**'
+    private final static String URI_PATTERN_SETUP = '/setup/?'
     private final static String URI_PATTERN_STATIC = '/static/.+'
 
     @Override
@@ -65,7 +65,7 @@ class WebConfigurationBean extends WebMvcConfigurerAdapter {
         new ForwardFilterRegistrationBuilder(
                 exclusions: [
                         URI_ALIAS_FAVICON,
-                        URI_SETUP,
+                        URI_PATTERN_SETUP,
                         URI_PATTERN_STATIC
                 ],
                 order: FILTER_ORDER_INDEX_PAGE_FORWARD,
