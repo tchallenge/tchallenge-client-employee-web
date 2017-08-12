@@ -6,6 +6,7 @@ import groovy.transform.TypeChecked
 import java.time.Instant
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -27,6 +28,9 @@ class SetupConfigurationBean {
     @Autowired
     LocationLayout location
 
+    @Value('${tchallenge.mode}')
+    String mode
+
     @Bean
     SetupLayout setupLayout() {
         new SetupLayout(
@@ -35,6 +39,7 @@ class SetupConfigurationBean {
                 asset: asset,
                 build: build,
                 location: location,
+                mode: mode,
                 startedAt: Instant.now()
         )
     }

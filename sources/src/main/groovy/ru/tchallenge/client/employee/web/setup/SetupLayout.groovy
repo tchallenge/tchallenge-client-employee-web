@@ -18,5 +18,6 @@ class SetupLayout {
     AssetLayout asset
     BuildLayout build
     LocationLayout location
+    String mode
     Instant startedAt
 }
