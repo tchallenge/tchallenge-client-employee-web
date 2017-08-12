@@ -8,9 +8,17 @@
                 <li>Title: {{title}}</li>
                 <li>Description: {{description}}</li>
                 <li>Operating mode: {{mode}}</li>
-                <li>Build ID: {{build.id}}</li>
-                <li>Build Version: {{build.version}}</li>
             </ul>
+            <hr>
+
+            {{#with build}}
+                <h2>Build properties</h2>
+                <ul>
+                    <li><b>Version:</b> {{version}}</li>
+                    <li><b>ID</b> {{id}}</li>
+                    <li><b>Timestamp:</b> {{createdAt}}</li>
+                </ul>
+            {{/with}}
             <hr>
 
             {{#with location}}
