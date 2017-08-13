@@ -1,21 +1,33 @@
 package ru.tchallenge.client.employee.web.utility.template
 
-import groovy.transform.PackageScope
 import groovy.transform.TypeChecked
 
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Service
+import com.github.jknack.handlebars.Handlebars
+import com.github.jknack.handlebars.Template
 
 @TypeChecked
-@PackageScope
-@Service
 class TemplateServiceBean implements TemplateService {
 
-    @Autowired
-    TemplateCache cache
+    TemplateCacheLayout cacheLayout
+
+    Handlebars handlebars
+
+    private final Map<String, Template> items = [:]
 
     @Override
     String render(String name, Object model) {
-        cache.get(name).apply(model)
+        template(name).apply(model)
+    }
+
+    private Template template(String name) {
+        cacheLayout.enabled ? items.computeIfAbsent(name, this.&compile) : compile(name)
+    }
+
+    private Template compile(String name) {
+        try {
+            handlebars.compile(name)
+        } catch (final Exception exception) {
+            throw new RuntimeException(exception)
+        }
     }
 }
