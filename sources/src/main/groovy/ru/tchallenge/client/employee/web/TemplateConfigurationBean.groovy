@@ -12,6 +12,7 @@ import com.github.jknack.handlebars.io.ClassPathTemplateLoader
 import com.github.jknack.handlebars.io.TemplateLoader
 
 import ru.tchallenge.client.employee.web.utility.template.TemplateCacheLayout
+import ru.tchallenge.client.employee.web.utility.template.TemplateLayout
 import ru.tchallenge.client.employee.web.utility.template.TemplateService
 import ru.tchallenge.client.employee.web.utility.template.TemplateServiceBean
 
@@ -24,17 +25,19 @@ class TemplateConfigurationBean {
     Boolean cacheEnabled
 
     @Bean
-    TemplateService templateService(Handlebars handlebars, TemplateCacheLayout cacheLayout) {
+    TemplateService templateService(Handlebars handlebars, TemplateLayout layout) {
         new TemplateServiceBean(
-                cacheLayout: cacheLayout,
+                layout: layout,
                 handlebars: handlebars
         )
     }
 
     @Bean
-    TemplateCacheLayout templateCacheLayout() {
-        new TemplateCacheLayout(
-                enabled: cacheEnabled
+    TemplateLayout templateLayout() {
+        new TemplateLayout(
+                cache: new TemplateCacheLayout(
+                        enabled: cacheEnabled
+                )
         )
     }
 

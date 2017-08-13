@@ -8,7 +8,7 @@ import com.github.jknack.handlebars.Template
 @TypeChecked
 class TemplateServiceBean implements TemplateService {
 
-    TemplateCacheLayout cacheLayout
+    TemplateLayout layout
 
     Handlebars handlebars
 
@@ -20,7 +20,7 @@ class TemplateServiceBean implements TemplateService {
     }
 
     private Template template(String name) {
-        cacheLayout.enabled ? items.computeIfAbsent(name, this.&compile) : compile(name)
+        layout.cache.enabled ? items.computeIfAbsent(name, this.&compile) : compile(name)
     }
 
     private Template compile(String name) {
