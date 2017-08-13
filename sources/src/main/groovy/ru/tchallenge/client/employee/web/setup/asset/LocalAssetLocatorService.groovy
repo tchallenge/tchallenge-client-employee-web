@@ -3,13 +3,7 @@ package ru.tchallenge.client.employee.web.setup.asset
 import groovy.transform.TypeChecked
 
 @TypeChecked
-enum AssetType {
+interface LocalAssetLocatorService {
 
-    MARKUP,
-
-    SCRIPT,
-
-    STYLE,
-
-    UNKNOWN
+    Collection<AssetDescriptor> getDescriptors()
 }

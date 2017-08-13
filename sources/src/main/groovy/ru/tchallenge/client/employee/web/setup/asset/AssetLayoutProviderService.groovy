@@ -3,13 +3,7 @@ package ru.tchallenge.client.employee.web.setup.asset
 import groovy.transform.TypeChecked
 
 @TypeChecked
-enum AssetType {
+interface AssetLayoutProviderService {
 
-    MARKUP,
-
-    SCRIPT,
-
-    STYLE,
-
-    UNKNOWN
+    AssetLayout getLayout()
 }

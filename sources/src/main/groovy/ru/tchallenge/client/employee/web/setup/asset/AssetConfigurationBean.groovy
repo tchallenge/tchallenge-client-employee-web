@@ -7,12 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.io.Resource
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver
+import org.springframework.core.io.support.ResourcePatternResolver
 
 import ru.tchallenge.client.employee.web.setup.asset.cache.AssetCacheLayout
 
 @TypeChecked
 @PackageScope
-@Configuration
+//@Configuration
 class AssetConfigurationBean {
 
     @Autowired
@@ -21,8 +24,23 @@ class AssetConfigurationBean {
     @Value('${tchallenge.asset.vendor.prefix}')
     String vendorUriPrefix
 
+    @Autowired
+    AssetLayoutProviderService assetLayoutProviderService
+
     @Bean
     AssetLayout assetLayout() {
+
+        AssetLayout layout = assetLayoutProviderService.layout
+
+        ClassLoader loader = Thread.currentThread().getContextClassLoader()
+        URL url = loader.getResource('static')
+        String path = url.getPath()
+        File[] files = new File(path).listFiles()
+
+        files
+                .findAll { File it -> it.file }
+                .each { File it -> println it.path }
+
         new AssetLayout(
                 cache: cache,
                 scripts: scripts,
@@ -38,8 +56,18 @@ class AssetConfigurationBean {
         vendorStyles + applicationStyles
     }
 
-    private static Collection<AssetDescriptor> getApplicationScripts() {
-        []
+    private Collection<AssetDescriptor> getApplicationScripts() {
+        Collection<AssetDescriptor> result = []
+        Resource[] resources = resourceResolver.getResources('classpath:/static/**/*.js')
+        resources.each { Resource it ->
+            String relativePath = it.file.path
+            AssetDescriptor descriptor = vendorScript(relativePath)
+            result.add(descriptor)
+        }
+        for (File f : getResourceFolderFiles('static')) {
+         //   System.out.println(f);
+        }
+        result
     }
 
     private static Collection<AssetDescriptor> getApplicationStyles() {
@@ -63,11 +91,11 @@ class AssetConfigurationBean {
         ]
     }
 
-    private AssetDescriptor vendorScript(String uri) {
+    AssetDescriptor vendorScript(String uri) {
         vendorAsset(uri, AssetType.SCRIPT)
     }
 
-    private AssetDescriptor vendorStyle(String uri) {
+    AssetDescriptor vendorStyle(String uri) {
         vendorAsset(uri, AssetType.STYLE)
     }
 
@@ -77,5 +105,21 @@ class AssetConfigurationBean {
                 uri: "${vendorUriPrefix}${uri}",
                 vendor: true
         )
+    }
+
+    private static ResourcePatternResolver getResourceResolver() {
+        new PathMatchingResourcePatternResolver(classLoader)
+    }
+
+    private static ClassLoader getClassLoader() {
+        Thread.currentThread().getContextClassLoader()
+    }
+
+
+    private static File[] getResourceFolderFiles(String folder) {
+        ClassLoader loader = Thread.currentThread().getContextClassLoader()
+        URL url = loader.getResource(folder)
+        String path = url.getPath()
+        new File(path).listFiles()
     }
 }
