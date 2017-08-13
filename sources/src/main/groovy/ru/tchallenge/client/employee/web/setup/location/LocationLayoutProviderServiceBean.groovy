@@ -4,13 +4,12 @@ import groovy.transform.PackageScope
 import groovy.transform.TypeChecked
 
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
+import org.springframework.stereotype.Service
 
 @TypeChecked
 @PackageScope
-@Configuration
-class LocationConfigurationBean {
+@Service
+class LocationLayoutProviderServiceBean implements LocationLayoutProviderService {
 
     @Value('${tchallenge.location.base}')
     String base
@@ -21,8 +20,8 @@ class LocationConfigurationBean {
     @Value('${tchallenge.location.service.complex}')
     String serviceComplex
 
-    @Bean
-    LocationLayout locationLayout() {
+    @Override
+    LocationLayout getLayout() {
         new LocationLayout(
                 base: base,
                 client: client,

@@ -7,17 +7,16 @@ import java.time.Instant
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Configuration
+import org.springframework.stereotype.Service
 
 import ru.tchallenge.client.employee.web.setup.asset.AssetLayoutProviderService
-import ru.tchallenge.client.employee.web.setup.location.LocationLayout
+import ru.tchallenge.client.employee.web.setup.location.LocationLayoutProviderService
 import ru.tchallenge.client.employee.web.utility.build.Build
 
 @TypeChecked
 @PackageScope
-@Configuration
-class SetupConfigurationBean {
+@Service
+class SetupLayoutProviderServiceBean implements SetupLayoutProviderService {
 
     @Autowired
     AssetLayoutProviderService assetLayoutProviderService
@@ -26,19 +25,19 @@ class SetupConfigurationBean {
     Build build
 
     @Autowired
-    LocationLayout location
+    LocationLayoutProviderService locationLayoutProviderService
 
     @Value('${tchallenge.mode}')
     String mode
 
-    @Bean
-    SetupLayout setupLayout() {
+    @Override
+    SetupLayout getLayout() {
         new SetupLayout(
                 title: 'tchallenge-client-employee-web',
                 description: 'T-Challenge client web application for employees',
                 asset: assetLayoutProviderService.layout,
                 build: build,
-                location: location,
+                location: locationLayoutProviderService.layout,
                 mode: mode,
                 startedAt: Instant.now()
         )

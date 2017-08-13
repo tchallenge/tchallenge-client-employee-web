@@ -42,7 +42,7 @@ class WebConfigurationBean extends WebMvcConfigurerAdapter {
     private final static String URI_PATTERN_STATIC = '/static/.+'
 
     @Autowired
-    SetupLayout setup
+    AssetCacheLayout assetCacheLayout
 
     @Override
     void addCorsMappings(CorsRegistry registry) {
@@ -54,7 +54,7 @@ class WebConfigurationBean extends WebMvcConfigurerAdapter {
         registry
                 .addResourceHandler(URI_MAPPING_STATIC)
                 .addResourceLocations(PATH_STATIC)
-                .setCacheControl(cacheControl(setup.asset.cache))
+                .setCacheControl(cacheControl(assetCacheLayout))
     }
 
     @Override
