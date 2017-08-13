@@ -19,5 +19,9 @@
         self.setConfiguration = function (newConfiguration) {
             configuration = newConfiguration;
         };
+
+        self.isSandboxMode = function () {
+            return configuration.mode === 'sandbox'
+        }
     }
 })();
