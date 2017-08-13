@@ -1,0 +1,35 @@
+<div class="container container-logon">
+
+    <form class="form-logon">
+
+        <h2 class="form-logon-heading">Вход в T-Challenge</h2>
+
+        <label for="accountEmailInput" class="sr-only">Email</label>
+        <input id="accountEmailInput"
+               ng-model="self.email"
+               type="email"
+               class="form-control"
+               placeholder="Email, например: ivan.ivanov@t-systems.ru"
+               autofocus>
+
+        <label for="accountSecretInput" class="sr-only">Пароль</label>
+        <input id="accountSecretInput"
+               ng-model="self.secret"
+               type="password"
+               class="form-control"
+               placeholder="Пароль">
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Запомнить меня
+            </label>
+        </div>
+
+        <button ng-click="self.authenticate()"
+                class="btn btn-lg btn-primary btn-block">
+            Войти
+        </button>
+    </form>
+
+    <span ng-if="self.error">{{self.error}}</span>
+</div>

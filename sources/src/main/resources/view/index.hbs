@@ -19,6 +19,11 @@
         </head>
 
         <body>
+
+            <url-resolver-configurator url="{{location.client}}" service-kernel-url="{{location.service.complex}}"></url-resolver-configurator>
+
+            <ui-view></ui-view>
+
             {{#each asset.scripts}}
                 <script src="{{uri}}?build={{../build.id}}"></script>
             {{/each}}
