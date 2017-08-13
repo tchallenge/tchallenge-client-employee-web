@@ -14,4 +14,6 @@ class AssetLayout {
     Collection<AssetDescriptor> scripts
     Collection<AssetDescriptor> styles
     Collection<AssetDescriptor> unknown
+    Collection<AssetDescriptor> vendorScripts
+    Collection<AssetDescriptor> vendorStyles
 }

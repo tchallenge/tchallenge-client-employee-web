@@ -13,6 +13,9 @@
 
             <title>T-Challenge Employee Client</title>
 
+            {{#each asset.vendorStyles}}
+                <link  rel="stylesheet" href="{{uri}}"/>
+            {{/each}}
             {{#each asset.styles}}
                 <link  rel="stylesheet" href="{{uri}}?build={{../build.id}}"/>
             {{/each}}
@@ -24,6 +27,9 @@
 
             <ui-view></ui-view>
 
+            {{#each asset.vendorScripts}}
+                <script src="{{uri}}"></script>
+            {{/each}}
             {{#each asset.scripts}}
                 <script src="{{uri}}?build={{../build.id}}"></script>
             {{/each}}

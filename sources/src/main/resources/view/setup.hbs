@@ -46,7 +46,7 @@
             {{/with}}
             <hr>
 
-            <h2>Static Resources</h2>
+            <h2>Static Assets</h2>
             {{#with asset}}
 
                 <h3>Caching</h3>
@@ -57,33 +57,47 @@
                     </ul>
                 {{/with}}
 
-                <h3>Styles</h3>
-                <table>
-                    <tr>
-                        <th>URI</th>
-                        <th>Vendor</th>
-                    </tr>
-                    {{#each styles}}
-                        <tr>
-                            <td>{{uri}}</td>
-                            <td>{{vendor}}</td>
-                        </tr>
-                    {{/each}}
-                </table>
-
                 <h3>Scripts</h3>
-                <table>
-                    <tr>
-                        <th>URI</th>
-                        <th>Vendor</th>
-                    </tr>
-                    {{#each scripts}}
-                        <tr>
-                            <td>{{uri}}</td>
-                            <td>{{vendor}}</td>
-                        </tr>
+                <h4>Vendor</h4>
+                <ul>
+                    {{#each vendorScripts}}
+                        <li>{{uri}}</li>
                     {{/each}}
-                </table>
+                </ul>
+                <h4>Local</h4>
+                <ul>
+                    {{#each scripts}}
+                        <li>{{uri}}</li>
+                    {{/each}}
+                </ul>
+
+                <h3>Styles</h3>
+                <h4>Vendor</h4>
+                <ul>
+                    {{#each vendorStyles}}
+                        <li>{{uri}}</li>
+                    {{/each}}
+                </ul>
+                <h4>Local</h4>
+                <ul>
+                    {{#each styles}}
+                        <li>{{uri}}</li>
+                    {{/each}}
+                </ul>
+
+                <h3>Markups</h3>
+                <ul>
+                    {{#each markups}}
+                        <li>{{uri}}</li>
+                    {{/each}}
+                </ul>
+
+                <h3>Others</h3>
+                <ul>
+                    {{#each unknowns}}
+                        <li>{{uri}}</li>
+                    {{/each}}
+                </ul>
             {{/with}}
         </body>
     </html>

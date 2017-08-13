@@ -50,9 +50,11 @@ class AssetLayoutProviderServiceBean implements AssetLayoutProviderService {
         new AssetLayout(
                 cache: cache,
                 markups: markups,
-                scripts: vendorScripts + scripts,
-                styles: vendorStyles + styles,
-                unknown: unknowns
+                scripts: scripts,
+                styles: styles,
+                unknown: unknowns,
+                vendorScripts: vendorScripts,
+                vendorStyles: vendorStyles
         )
     }
 
