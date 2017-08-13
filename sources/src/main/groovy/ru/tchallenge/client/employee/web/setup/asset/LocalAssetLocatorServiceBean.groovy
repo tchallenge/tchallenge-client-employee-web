@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
 class LocalAssetLocatorServiceBean implements LocalAssetLocatorService {
 
     String localAssetRootPathRelative = 'static'
-    String localAssetUriPrefix = 'asset/'
+    String localAssetUriPrefix = 'static/'
 
     @Override
     Collection<AssetDescriptor> getDescriptors() {
@@ -57,7 +57,7 @@ class LocalAssetLocatorServiceBean implements LocalAssetLocatorService {
                 return AssetType.SCRIPT
             case 'htm':
             case 'html':
-                return AssetType.SCRIPT
+                return AssetType.MARKUP
             default:
                 return AssetType.UNKNOWN
         }
