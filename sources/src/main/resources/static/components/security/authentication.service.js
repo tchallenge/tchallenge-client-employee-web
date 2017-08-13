@@ -5,7 +5,9 @@
     angular
         .module('application.security')
         .service('authenticationService', [
+            '$q',
             '$http',
+            'applicationConfigurationService',
             'loggerService',
             'urlResolverService',
             'homeStateContextService',
@@ -13,7 +15,9 @@
             AuthenticationService
         ]);
 
-    function AuthenticationService($http,
+    function AuthenticationService($q,
+                                   $http,
+                                   applicationConfigurationService,
                                    loggerService,
                                    urlResolverService,
                                    homeStateContextService,
@@ -21,9 +25,46 @@
 
         var self = this;
 
-        var url = urlResolverService.resolveKernelServiceUrl('authentication');
-
         self.authenticate = function (credential) {
+            if (applicationConfigurationService.isSandboxMode()) {
+                return authenticateInSandbox(credential)
+            } else {
+                return authenticateViaHttp(credential)
+            }
+        };
+
+        self.deauthenticate = function () {
+            authenticationContextService.reset();
+            homeStateContextService.reset();
+        };
+
+        function authenticateInSandbox(credential) {
+
+            var authentication = {
+                account: {
+                    employee: {
+                        roles: [
+                            'ADMIN'
+                        ]
+                    },
+                    person: {
+                        quickname: 'Имя пользователя'
+                    }
+                },
+                token: {
+                    id: 'PREDEFINED-EMPLOYEE-TOKEN'
+                }
+            };
+
+            loggerService.info('authentication attempt succeeded');
+            authenticationContextService.setAuthentication(authentication);
+
+            return $q.when(authentication);
+        }
+
+        function authenticateViaHttp(credential) {
+
+            var url = urlResolverService.resolveKernelServiceUrl('authentication');
 
             return $http
 
@@ -40,11 +81,6 @@
                     loggerService.warn('authentication attempt failed');
                     throw response;
                 });
-        };
-
-        self.deauthenticate = function () {
-            authenticationContextService.reset();
-            homeStateContextService.reset();
-        };
+        }
     }
 })();
