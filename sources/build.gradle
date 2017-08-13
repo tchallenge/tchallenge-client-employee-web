@@ -42,8 +42,8 @@ task createProperties(dependsOn: processResources) {
 
         buildProperties.withWriter { writer ->
             def properties = new Properties()
-            properties['createdAt'] = Instant.now().toString()
             properties['id'] = UUID.randomUUID().toString()
+            properties['timestamp'] = Instant.now().toString()
             properties['version'] = project.version.toString()
             properties.store(writer, 'Build properties')
         }

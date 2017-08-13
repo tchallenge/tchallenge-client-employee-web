@@ -10,10 +10,9 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
-import ru.tchallenge.client.employee.web.setup.asset.AssetLayout
 import ru.tchallenge.client.employee.web.setup.asset.AssetLayoutProviderService
-import ru.tchallenge.client.employee.web.setup.build.BuildLayout
 import ru.tchallenge.client.employee.web.setup.location.LocationLayout
+import ru.tchallenge.client.employee.web.utility.build.Build
 
 @TypeChecked
 @PackageScope
@@ -21,11 +20,10 @@ import ru.tchallenge.client.employee.web.setup.location.LocationLayout
 class SetupConfigurationBean {
 
     @Autowired
-//    AssetLayout asset
     AssetLayoutProviderService assetLayoutProviderService
 
     @Autowired
-    BuildLayout build
+    Build build
 
     @Autowired
     LocationLayout location
