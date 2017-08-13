@@ -36,6 +36,6 @@ tchallenge:
     service:
       complex: ${location-service-complex:http://localhost:3000}
 
-  mode: ${mode:sandbox}
+  mode: ${mode:production}
 
   template.cache.enabled: false
