@@ -8,6 +8,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean
 class ForwardFilterRegistrationBuilder {
 
     Collection<String> exclusions
+    String name
     Integer order
     String scope
     String target
@@ -19,7 +20,7 @@ class ForwardFilterRegistrationBuilder {
                 target: target
         ))
         result.addUrlPatterns(scope)
-        result.setName(UUID.randomUUID().toString())
+        result.setName(name)
         result.setOrder(order)
         result
     }

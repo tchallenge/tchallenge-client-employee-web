@@ -65,6 +65,7 @@ class WebConfigurationBean extends WebMvcConfigurerAdapter {
     @Bean
     FilterRegistrationBean faviconForwardFilterRegistration() {
         new ForwardFilterRegistrationBuilder(
+                name: 'favicon-forward',
                 order: FILTER_ORDER_FAVICON_FORWARD,
                 scope: URI_ALIAS_FAVICON,
                 target: URI_FAVICON
@@ -79,6 +80,7 @@ class WebConfigurationBean extends WebMvcConfigurerAdapter {
                         URI_PATTERN_SETUP,
                         URI_PATTERN_STATIC
                 ],
+                name: 'index-page-forward',
                 order: FILTER_ORDER_INDEX_PAGE_FORWARD,
                 scope: URI_ALIAS_INDEX,
                 target: URI_INDEX
