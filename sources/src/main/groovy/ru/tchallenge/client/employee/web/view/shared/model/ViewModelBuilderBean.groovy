@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Scope
 import org.springframework.context.annotation.ScopedProxyMode
 import org.springframework.stereotype.Component
 
+import com.fasterxml.jackson.databind.ObjectMapper
+
 import ru.tchallenge.client.employee.web.setup.SetupLayout
 import ru.tchallenge.client.employee.web.setup.SetupLayoutProviderService
 
@@ -21,6 +23,9 @@ class ViewModelBuilderBean implements ViewModelBuilder {
 
     @Autowired
     SetupLayoutProviderService setupLayoutProviderService
+
+    @Autowired
+    ObjectMapper objectMapper
 
     private Map<String, ?> attributes
 
@@ -38,7 +43,8 @@ class ViewModelBuilderBean implements ViewModelBuilder {
     protected void init() {
         SetupLayout setupLayout = setupLayoutProviderService.layout
         attributes = [
-                setup: setupLayout
+                setup: setupLayout,
+                setupSerialized: objectMapper.writeValueAsString(setupLayout)
         ]
     }
 }

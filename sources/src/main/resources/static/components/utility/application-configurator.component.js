@@ -4,11 +4,11 @@
 
     angular
         .module('application.utility')
-        .component('loggerConfigurator', {
+        .component('applicationConfigurator', {
             bindings: {
-                level: '@'
+                setupSerialized: '@'
             },
-            controller: 'loggerConfiguratorController',
+            controller: 'applicationConfiguratorController',
             controllerAs: 'self'
         });
 })();

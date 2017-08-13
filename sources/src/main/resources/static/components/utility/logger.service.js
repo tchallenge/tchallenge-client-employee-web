@@ -4,21 +4,19 @@
 
     angular
         .module('application.utility')
-        .service('loggerService', [UrlResolverService]);
+        .service('loggerService', [
+            'applicationConfigurationService',
+            LoggerService
+        ]);
 
-    function UrlResolverService() {
+    function LoggerService(applicationConfigurationService) {
 
         var self = this;
 
         var levels = ['DEBUG, INFO, WARN, ERROR'];
 
-        var configuration;
         var defaultConfiguration = {
             level: 'INFO'
-        };
-
-        self.configure = function (newConfiguration) {
-            configuration = newConfiguration;
         };
 
         self.debug = function (message) {
@@ -50,6 +48,7 @@
         };
 
         function shouldLog(level) {
+            var configuration = applicationConfigurationService.getConfiguration().logging;
             var levelIndex = levels.indexOf(level);
             if (configuration && configuration.level) {
                 return levelIndex >= levels.indexOf(configuration.level);

@@ -4,21 +4,19 @@
 
     angular
         .module('application.utility')
-        .service('urlResolverService', [UrlResolverService]);
+        .service('urlResolverService', [
+            'applicationConfigurationService',
+            UrlResolverService
+        ]);
 
-    function UrlResolverService() {
+    function UrlResolverService(applicationConfigurationService) {
 
         var self = this;
 
-        var configuration;
-
-        self.configure = function (newConfiguration) {
-            configuration = newConfiguration;
-        };
-
         self.resolveKernelServiceUrl = function () {
+            var configuration = applicationConfigurationService.getConfiguration();
             var url = [];
-            url.push(configuration.serviceKernelUrl);
+            url.push(configuration.location.service.complex);
             for (var i = 0; i < arguments.length; i++) {
                 url.push(arguments[i]);
             }
@@ -26,8 +24,9 @@
         };
 
         self.resolveUrl = function () {
+            var configuration = applicationConfigurationService.getConfiguration();
             var url = [];
-            url.push(configuration.url);
+            url.push(configuration.location.client);
             for (var i = 0; i < arguments.length; i++) {
                 url.push(arguments[i]);
             }
