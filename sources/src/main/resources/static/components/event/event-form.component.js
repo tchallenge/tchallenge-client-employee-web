@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -13,4 +13,4 @@
             controllerAs: 'self',
             templateUrl: 'static/components/event/event-form.component.html'
         });
-})();
+})(window.angular);

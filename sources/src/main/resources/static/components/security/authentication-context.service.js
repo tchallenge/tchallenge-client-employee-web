@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -32,4 +32,4 @@
             console.log("INFO: authentication context reset");
         };
     }
-})();
+})(window.angular);

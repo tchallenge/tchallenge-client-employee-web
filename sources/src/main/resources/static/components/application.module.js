@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -16,4 +16,4 @@
             'application.task',
             'application.workbook'
         ]);
-})();
+})(window.angular);

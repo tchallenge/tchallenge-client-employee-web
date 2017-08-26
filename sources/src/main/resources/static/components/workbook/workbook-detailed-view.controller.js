@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -17,4 +17,4 @@
             self.id = $stateParams['id'];
         };
     }
-})();
+})(window.angular);

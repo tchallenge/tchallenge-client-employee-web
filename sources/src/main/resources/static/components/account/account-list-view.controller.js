@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -9,4 +9,4 @@
     function AccountListViewController() {
 
     }
-})();
+})(window.angular);

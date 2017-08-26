@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -17,4 +17,4 @@
             menuConfiguratorService.updateMenuState('accountSection');
         };
     }
-})();
+})(window.angular);

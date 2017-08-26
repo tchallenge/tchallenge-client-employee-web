@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -12,4 +12,4 @@
     function configureHttpProvider($httpProvider) {
         $httpProvider.interceptors.push('httpRequestInterceptorFactory');
     }
-})();
+})(window.angular);

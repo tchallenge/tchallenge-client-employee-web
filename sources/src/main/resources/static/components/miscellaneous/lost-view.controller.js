@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -19,4 +19,4 @@
             $state.go(homeStateContextService.getHomeState());
         };
     }
-})();
+})(window.angular);

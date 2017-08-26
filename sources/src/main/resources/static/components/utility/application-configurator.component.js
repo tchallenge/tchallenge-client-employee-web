@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -11,4 +11,4 @@
             controller: 'applicationConfiguratorController',
             controllerAs: 'self'
         });
-})();
+})(window.angular);

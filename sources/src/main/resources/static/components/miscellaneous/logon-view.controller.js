@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -78,4 +78,4 @@
             return ['root.authorized', stateSuffix].join('.');
         }
     }
-})();
+})(window.angular);

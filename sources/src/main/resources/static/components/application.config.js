@@ -1,15 +1,17 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
     angular
         .module('application')
-        .config(['$locationProvider', function ($locationProvider) {
-                $locationProvider.html5Mode(true);
-            }
-        ])
-        .config(['$urlMatcherFactoryProvider', function ($urlMatcherFactoryProvider) {
-            $urlMatcherFactoryProvider.strictMode(false);
-        }
-        ]);
-})();
+        .config(['$locationProvider', locationProviderConfigurer])
+        .config(['$urlMatcherFactoryProvider', urlMatcherFactoryProviderConfigurer]);
+
+    function locationProviderConfigurer($locationProvider) {
+        $locationProvider.html5Mode(true);
+    }
+
+    function urlMatcherFactoryProviderConfigurer($urlMatcherFactoryProvider) {
+        $urlMatcherFactoryProvider.strictMode(false);
+    }
+})(window.angular);

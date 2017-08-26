@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -36,4 +36,4 @@
             loggerService.debug("home state context reset");
         };
     }
-})();
+})(window.angular);

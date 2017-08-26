@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -18,4 +18,4 @@
             applicationConfigurationService.setConfiguration(setup);
         };
     }
-})();
+})(window.angular);

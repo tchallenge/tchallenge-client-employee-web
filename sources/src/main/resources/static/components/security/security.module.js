@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -7,4 +7,4 @@
             'ngStorage',
             'application.utility'
         ]);
-})();
+})(window.angular);

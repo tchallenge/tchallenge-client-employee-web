@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -24,4 +24,4 @@
             return configuration.mode === 'sandbox'
         }
     }
-})();
+})(window.angular);

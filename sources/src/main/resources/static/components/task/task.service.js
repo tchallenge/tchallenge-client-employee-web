@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -29,7 +29,7 @@
                 .then(function (response) {
                     return response.data;
                 }).catch(function (response) {
-                    loggerService.error("getting task by id has failed");
+                    loggerService.error('getting task by id has failed');
                 });
         };
 
@@ -43,8 +43,8 @@
                 .then(function (response) {
                     return response.data;
                 }).catch(function (response) {
-                    loggerService.error("task search has failed");
+                    loggerService.error('task search has failed');
                 });
         };
     }
-})();
+})(window.angular);

@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -12,4 +12,4 @@
             controllerAs: 'self',
             templateUrl: 'static/components/workbook/workbook-list-item.component.html'
         });
-})();
+})(window.angular);

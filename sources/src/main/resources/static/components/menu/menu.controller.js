@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -76,7 +76,7 @@
             var account = authentication.account;
             var person = account.person;
             return person.quickname
-                || [person.firstname, person.lastname].join(" ")
+                || [person.firstname, person.lastname].join(' ')
                 || account.email;
         }
 
@@ -92,4 +92,4 @@
             };
         }
     }
-})();
+})(window.angular);

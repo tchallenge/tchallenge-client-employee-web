@@ -1,4 +1,4 @@
-(function () {
+(function (angular) {
 
     'use strict';
 
@@ -7,4 +7,4 @@
             'ui.router',
             'application.menu'
         ]);
-})();
+})(window.angular);
