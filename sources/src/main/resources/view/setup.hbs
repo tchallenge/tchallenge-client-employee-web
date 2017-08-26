@@ -1,104 +1,131 @@
 <!DOCTYPE html>
 
-{{#with setup}}
-    <html>
+<html>
 
-        <head>
-            <base href="{{location.base}}"/>
-            <title>Setup</title>
-        </head>
+    <head>
 
-        <body>
-            <h1>Application Setup</h1>
-            <u>Important: this page MUST NOT be accessible in production!</u>
+        {{! NOTE: in-browser page encoding }}
+        <meta charset="UTF-8">
 
-            <h2>General</h2>
+        {{! NOTE: base URL for all relative requests (AJAX, resources, e.t.c) }}
+        <base href="{{setup.location.base}}"/>
+
+        <title>T-Challenge Employee Client Setup</title>
+    </head>
+
+    <body>
+
+        <h1>Application Setup</h1>
+        <u>Important: this page MUST NOT be accessible in production!</u>
+
+        {{! NOTE: general setup properties }}
+        <h2>General</h2>
+        <ul>
+            <li><b>Title:</b> {{setup.title}}</li>
+            <li><b>Description:</b> {{setup.description}}</li>
+            <li><b>Operating mode:</b> {{setup.mode}}</li>
+            <li><b>Started at:</b> {{setup.startedAt}}</li>
+        </ul>
+        <hr>
+
+        {{! NOTE: build properties }}
+        <h2>Build</h2>
+        {{#with setup.build}}
             <ul>
-                <li><b>Title:</b> {{title}}</li>
-                <li><b>Description:</b> {{description}}</li>
-                <li><b>Operating mode:</b> {{mode}}</li>
-                <li><b>Started at:</b> {{startedAt}}</li>
+                <li><b>ID</b> {{id}}</li>
+                <li><b>Timestamp:</b> {{timestamp}}</li>
+                <li><b>Version:</b> {{version}}</li>
             </ul>
-            <hr>
+        {{/with}}
+        <hr>
 
-            <h2>Build</h2>
-            {{#with build}}
-                <ul>
-                    <li><b>ID</b> {{id}}</li>
-                    <li><b>Timestamp:</b> {{timestamp}}</li>
-                    <li><b>Version:</b> {{version}}</li>
-                </ul>
-            {{/with}}
-            <hr>
-
-            <h2>Locations</h2>
-            {{#with location}}
-                <ul>
-                    <li><b>Base URL:</b> {{base}}</li>
-                    <li><b>Client self URL:</b> {{client}}</li>
-                    <li>
+        {{! NOTE: location (outbound communication) properties }}
+        <h2>Locations</h2>
+        {{#with setup.location}}
+            <ul>
+                <li><b>Base URL:</b> {{base}}</li>
+                <li><b>Client self URL:</b> <a target="_blank" href="{{client}}">{{client}}</a></li>
+                <li>
+                    {{#with service}}
                         <b>Services</b>
                         <ul>
-                            <li><b>Complex:</b> {{service.complex}}</li>
+                            <li><b>Client self URL:</b> <a target="_blank" href="{{complex}}">{{complex}}</a></li>
                         </ul>
-                    </li>
+                    {{/with}}
+                </li>
+            </ul>
+        {{/with}}
+        <hr>
+
+        {{! NOTE: static assets }}
+        <h2>Static Assets</h2>
+        {{#with setup.asset}}
+
+            <h3>Caching</h3>
+            {{#with cache}}
+                <ul>
+                    <li><b>Enabled:</b> {{enabled}}</li>
+                    <li><b>Expiration:</b> {{expiration}}</li>
                 </ul>
             {{/with}}
-            <hr>
 
-            <h2>Static Assets</h2>
-            {{#with asset}}
+            <h3>Scripts</h3>
 
-                <h3>Caching</h3>
-                {{#with cache}}
-                    <ul>
-                        <li><b>Enabled:</b> {{enabled}}</li>
-                        <li><b>Expiration:</b> {{expiration}}</li>
-                    </ul>
-                {{/with}}
-
-                <h3>Scripts</h3>
+            {{#if vendorScripts}}
                 <h4>Vendor</h4>
                 <ul>
                     {{#each vendorScripts}}
-                        <li>{{uri}}</li>
+                        <li><a target="_blank" href="{{uri}}">{{uri}}</a></li>
                     {{/each}}
                 </ul>
+            {{/if}}
+
+            {{#if scripts}}
                 <h4>Local</h4>
                 <ul>
                     {{#each scripts}}
-                        <li>{{uri}}</li>
+                        <li><a target="_blank" href="{{uri}}">{{uri}}</a></li>
                     {{/each}}
                 </ul>
+            {{/if}}
 
-                <h3>Styles</h3>
+            <h3>Styles</h3>
+
+            {{#if vendorStyles}}
                 <h4>Vendor</h4>
                 <ul>
                     {{#each vendorStyles}}
-                        <li>{{uri}}</li>
+                        <li><a target="_blank" href="{{uri}}">{{uri}}</a></li>
                     {{/each}}
                 </ul>
+            {{/if}}
+
+            {{#if styles}}
                 <h4>Local</h4>
                 <ul>
                     {{#each styles}}
-                        <li>{{uri}}</li>
+                        <li><a target="_blank" href="{{uri}}">{{uri}}</a></li>
                     {{/each}}
                 </ul>
+            {{/if}}
 
+            {{#if markups}}
                 <h3>Markups</h3>
                 <ul>
                     {{#each markups}}
-                        <li>{{uri}}</li>
+                        <li><a target="_blank" href="{{uri}}">{{uri}}</a></li>
                     {{/each}}
                 </ul>
+            {{/if}}
 
+            {{#if unknowns}}
                 <h3>Others</h3>
                 <ul>
                     {{#each unknowns}}
-                        <li>{{uri}}</li>
+                        <li><a target="_blank" href="{{uri}}">{{uri}}</a></li>
                     {{/each}}
                 </ul>
-            {{/with}}
-        </body>
-    </html>
-{{/with}}
+            {{/if}}
+        {{/with}}
+    </body>
+</html>
