@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 
-{{#with setup}}
-    <html>
+<html>
+    <head>
 
-        <head>
+        {{! NOTE: in-browser page encoding }}
+        <meta charset="UTF-8">
 
-            <base href="{{location.base}}"/>
+        {{! NOTE: page encoding }}
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
+        {{! TODO: let Angular application to set the title }}
+        <title>T-Challenge Employee Client</title>
 
-            <title>T-Challenge Employee Client</title>
+        {{! NOTE: base URL for all relative requests (AJAX, resources, e.t.c) }}
+        <base href="{{setup.location.base}}"/>
 
-            {{#each asset.vendorStyles}}
-                <link  rel="stylesheet" href="{{uri}}"/>
-            {{/each}}
-            {{#each asset.styles}}
-                <link  rel="stylesheet" href="{{uri}}?build={{../build.id}}"/>
-            {{/each}}
-        </head>
+        {{! NOTE: link vendor CSS resources before own resources }}
+        {{! TODO: remove vendor resources (frontend build script needed) }}
+        {{#each setup.asset.vendorStyles}}
+            <link rel="stylesheet" href="{{uri}}"/>
+        {{/each}}
 
-        <body>
+        {{! NOTE: link own CSS resources }}
+        {{#each setup.asset.styles}}
+            <link rel="stylesheet" href="{{uri}}?build={{setup.build.id}}"/>
+        {{/each}}
+    </head>
+    <body>
 
-            <application-configurator setup-serialized="{{../setupSerialized}}"></application-configurator>
+        {{! NOTE: configuration of Angular application }}
+        <application-configurator setup-serialized="{{setupSerialized}}"></application-configurator>
 
-            <ui-view></ui-view>
+        {{! NOTE: the root UI view }}
+        <ui-view></ui-view>
 
-            {{#each asset.vendorScripts}}
-                <script src="{{uri}}"></script>
-            {{/each}}
-            {{#each asset.scripts}}
-                <script src="{{uri}}?build={{../build.id}}"></script>
-            {{/each}}
-        </body>
-    </html>
-{{/with}}
+        {{! NOTE: include vendor JavaScript resources before own resources}}
+        {{! TODO: remove vendor resources (frontend build script needed) }}
+        {{#each setup.asset.vendorScripts}}
+            <script src="{{uri}}"></script>
+        {{/each}}
+
+        {{! NOTE: include own JavaScript resources }}
+        {{#each setup.asset.scripts}}
+            <script src="{{uri}}?build={{setup.build.id}}"></script>
+        {{/each}}
+    </body>
+</html>
