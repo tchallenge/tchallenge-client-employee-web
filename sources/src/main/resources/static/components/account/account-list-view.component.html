@@ -1,1 +1,21 @@
-Account List View
+<form>
+
+    <button ng-click="self.search()"
+            class="btn btn-primary btn-block"
+            autofocus>
+        Применить фильтр
+    </button>
+
+    <button ng-click="self.navigateNewTask()()"
+            class="btn btn-primary btn-block">
+        Создать
+    </button>
+</form>
+
+<div>
+    <ul>
+        <ng-repeat ng-repeat="account in self.searchResult.items">
+            <li>{{account.id}}</li>
+        </ng-repeat>
+    </ul>
+</div>
